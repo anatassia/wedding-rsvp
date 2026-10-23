@@ -31,30 +31,30 @@ export async function createRsvp(body) {
   return parseResponse(res);
 }
 
-// "Semak / Ubah RSVP": every call here is verified by reference_code + phone.
-export async function lookupRsvp(referenceCode, phone) {
+// "Semak / Ubah RSVP": every call is verified by its random reference code.
+export async function lookupRsvp(referenceCode) {
   const res = await fetch("/api/rsvp/manage", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ reference_code: referenceCode, phone }),
+    body: JSON.stringify({ reference_code: referenceCode }),
   });
   return parseResponse(res);
 }
 
-export async function updateRsvp(referenceCode, phone, body) {
+export async function updateRsvp(referenceCode, body) {
   const res = await fetch("/api/rsvp/manage", {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ reference_code: referenceCode, phone, ...body }),
+    body: JSON.stringify({ reference_code: referenceCode, ...body }),
   });
   return parseResponse(res);
 }
 
-export async function cancelRsvp(referenceCode, phone) {
+export async function cancelRsvp(referenceCode) {
   const res = await fetch("/api/rsvp/manage", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ reference_code: referenceCode, phone }),
+    body: JSON.stringify({ reference_code: referenceCode }),
   });
   return parseResponse(res);
 }

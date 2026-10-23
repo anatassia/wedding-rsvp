@@ -6,7 +6,7 @@ export async function fetchGuestRows(supabase, { search, eventDateId, status }) 
   let query = supabase
     .from("rsvps")
     .select(
-      "id, reference_code, guest_name, phone, party_size, companion_names, notes, status, created_at, updated_at, cancelled_at, event_date_id, event_dates(event_date, start_time, end_time, venue)"
+      "id, reference_code, guest_name, party_size, companion_names, notes, status, created_at, updated_at, cancelled_at, event_date_id, event_dates(event_date, start_time, end_time, venue)"
     )
     .order("created_at", { ascending: false });
 
@@ -21,7 +21,7 @@ export async function fetchGuestRows(supabase, { search, eventDateId, status }) 
     // them from user input rather than letting it alter the filter shape.
     const term = search.trim().replace(/[,()%]/g, "");
     if (term.length > 0) {
-      query = query.or(`guest_name.ilike.%${term}%,phone.ilike.%${term}%,reference_code.ilike.%${term}%`);
+      query = query.or(`guest_name.ilike.%${term}%,reference_code.ilike.%${term}%`);
     }
   }
 

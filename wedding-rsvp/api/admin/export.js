@@ -6,7 +6,6 @@ import { fetchGuestRows } from "./guests.js";
 const HEADERS = [
   "reference_code",
   "guest_name",
-  "phone",
   "party_size",
   "companion_names",
   "notes",
@@ -60,7 +59,6 @@ export default async function handler(req, res) {
     [
       row.reference_code,
       row.guest_name,
-      row.phone,
       row.party_size,
       row.companion_names,
       row.notes,

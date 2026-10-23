@@ -68,7 +68,7 @@ defineExpose({ reload: load })
 <template>
   <div class="guest-list">
     <div class="guest-list__filters">
-      <input v-model="search" type="text" placeholder="Cari nama, telefon atau kod rujukan" />
+      <input v-model="search" type="text" placeholder="Cari nama atau kod rujukan" />
       <select v-model="dateFilter">
         <option value="">Semua Sesi</option>
         <option v-for="date in dates" :key="date.id" :value="date.id">
@@ -94,7 +94,6 @@ defineExpose({ reload: load })
         <tr>
           <th>Kod Rujukan</th>
           <th>Nama</th>
-          <th>Telefon</th>
           <th>Sesi</th>
           <th>Bilangan</th>
           <th>Status</th>
@@ -104,7 +103,6 @@ defineExpose({ reload: load })
         <tr v-for="row in guests" :key="row.id">
           <td>{{ row.reference_code }}</td>
           <td>{{ row.guest_name }}</td>
-          <td>{{ row.phone }}</td>
           <td>{{ row.event_dates ? formatEventTime(row.event_dates.start_time, row.event_dates.end_time) : "—" }}</td>
           <td>{{ row.party_size }}</td>
           <td>

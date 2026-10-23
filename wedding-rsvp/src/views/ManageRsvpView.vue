@@ -10,7 +10,6 @@ onMounted(loadDates)
 
 const phase = ref("lookup") // lookup | view | edit
 const referenceCode = ref("")
-const phone = ref("")
 const lookupError = ref("")
 const looking = ref(false)
 
@@ -27,7 +26,7 @@ const effectiveMax = computed(() => {
   const date = dates.value.find((d) => d.id === editForm.event_date_id)
   if (!date) return 0
   const ownExisting = date.id === rsvp.value?.event_date_id ? rsvp.value.party_size : 0
-  return Math.min(3, Math.max(0, date.remaining + ownExisting))
+  return Math.min(5, Math.max(0, date.remaining + ownExisting))
 })
 
 async function handleLookup() {
@@ -35,7 +34,7 @@ async function handleLookup() {
   looking.value = true
   lookupError.value = ""
   try {
-    const result = await lookupRsvp(referenceCode.value.trim(), phone.value.trim())
+    const result = await lookupRsvp(referenceCode.value.trim())
     rsvp.value = result.rsvp
     phase.value = "view"
   } catch (err) {
@@ -59,7 +58,7 @@ async function handleUpdate() {
   updating.value = true
   updateError.value = ""
   try {
-    const result = await updateRsvp(referenceCode.value.trim(), phone.value.trim(), {
+    const result = await updateRsvp(referenceCode.value.trim(), {
       event_date_id: editForm.event_date_id,
       party_size: editForm.party_size,
       companion_names: editForm.companion_names,
@@ -79,7 +78,7 @@ async function handleCancel() {
   cancelling.value = true
   cancelError.value = ""
   try {
-    const result = await cancelRsvp(referenceCode.value.trim(), phone.value.trim())
+    const result = await cancelRsvp(referenceCode.value.trim())
     rsvp.value = result.rsvp
   } catch (err) {
     cancelError.value = err.message
@@ -94,18 +93,13 @@ async function handleCancel() {
     <div class="container manage-rsvp">
       <div v-if="phase === 'lookup'">
         <h1>Semak / Ubah RSVP</h1>
-        <p>Masukkan kod rujukan dan nombor telefon yang digunakan semasa RSVP.</p>
+        <p>Masukkan kod rujukan yang diterima semasa RSVP.</p>
 
         <form @submit.prevent="handleLookup">
           <div class="field">
             <label for="reference_code">Kod Rujukan</label>
             <input id="reference_code" v-model="referenceCode" type="text" autocomplete="off" required />
           </div>
-          <div class="field">
-            <label for="phone">Nombor Telefon</label>
-            <input id="phone" v-model="phone" type="tel" required />
-          </div>
-
           <p v-if="lookupError" class="alert alert--error" role="alert">{{ lookupError }}</p>
 
           <button type="submit" class="btn" :disabled="looking" style="width: 100%">
@@ -142,7 +136,7 @@ async function handleCancel() {
         <div class="field">
           <label for="edit_party_size">Bilangan Tetamu</label>
           <select id="edit_party_size" v-model.number="editForm.party_size">
-            <option v-for="n in Math.min(3, effectiveMax) || 1" :key="n" :value="n">{{ n }} orang</option>
+            <option v-for="n in Math.min(5, effectiveMax) || 1" :key="n" :value="n">{{ n }} orang</option>
           </select>
         </div>
 

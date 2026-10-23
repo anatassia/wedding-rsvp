@@ -36,10 +36,6 @@ const emit = defineEmits(["back", "confirm"])
         <dd>{{ form.guest_name }}</dd>
       </div>
       <div>
-        <dt>Telefon</dt>
-        <dd>{{ form.phone }}</dd>
-      </div>
-      <div>
         <dt>Bilangan Tetamu</dt>
         <dd>{{ form.party_size }} orang</dd>
       </div>

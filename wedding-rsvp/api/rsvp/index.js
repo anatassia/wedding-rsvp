@@ -3,7 +3,6 @@ import { mapRpcError } from "../../server/rpcErrors.js";
 import { checkRateLimit } from "../../server/rateLimit.js";
 import {
   isNonEmptyString,
-  isValidPhone,
   isValidPartySize,
   sanitizeCompanionNames,
   sanitizeNotes,
@@ -32,7 +31,7 @@ export default async function handler(req, res) {
     return res.status(429).json({ success: false, message: "Terlalu banyak permintaan, sila cuba sebentar lagi" });
   }
 
-  const { event_date_id, guest_name, phone, party_size, companion_names, notes } = req.body || {};
+  const { event_date_id, guest_name, party_size, companion_names, notes } = req.body || {};
 
   if (!isNonEmptyString(event_date_id, 100)) {
     return res.status(400).json({ success: false, message: "Sila pilih tarikh" });
@@ -40,17 +39,13 @@ export default async function handler(req, res) {
   if (!isNonEmptyString(guest_name, 150)) {
     return res.status(400).json({ success: false, message: "Nama penuh diperlukan" });
   }
-  if (!isValidPhone(phone)) {
-    return res.status(400).json({ success: false, message: "Nombor telefon tidak sah" });
-  }
   if (!isValidPartySize(party_size)) {
-    return res.status(400).json({ success: false, message: "Jumlah tetamu mesti 1, 2, atau 3" });
+    return res.status(400).json({ success: false, message: "Jumlah tetamu mesti antara 1 hingga 5 orang" });
   }
 
   const { data, error } = await supabase.rpc("fn_create_rsvp", {
     p_event_date_id: event_date_id,
     p_guest_name: guest_name.trim(),
-    p_phone: phone.trim(),
     p_party_size: party_size,
     p_companion_names: sanitizeCompanionNames(companion_names),
     p_notes: sanitizeNotes(notes),

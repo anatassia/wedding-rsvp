@@ -36,10 +36,6 @@ const confirmingCancel = ref(false)
         <dd>{{ rsvp.guest_name }}</dd>
       </div>
       <div>
-        <dt>Telefon</dt>
-        <dd>{{ rsvp.phone }}</dd>
-      </div>
-      <div>
         <dt>Bilangan Tetamu</dt>
         <dd>{{ rsvp.party_size }} orang</dd>
       </div>

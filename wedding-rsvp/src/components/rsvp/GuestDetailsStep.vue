@@ -7,20 +7,23 @@ const props = defineProps({
 })
 const emit = defineEmits(["update:modelValue", "back", "next"])
 
-const PARTY_LABELS = { 1: "Saya sahaja", 2: "Dua orang", 3: "Tiga orang" }
+const PARTY_LABELS = {
+  1: "Saya sahaja",
+  2: "Dua orang",
+  3: "Tiga orang",
+  4: "Empat orang",
+  5: "Lima orang",
+}
 
 function update(field, value) {
   emit("update:modelValue", { ...props.modelValue, [field]: value })
 }
 
-const partyOptions = computed(() => [1, 2, 3].filter((n) => n <= props.maxAllowed))
+const partyOptions = computed(() => [1, 2, 3, 4, 5].filter((n) => n <= props.maxAllowed))
 
 const errors = computed(() => {
   const e = {}
   if (!props.modelValue.guest_name?.trim()) e.guest_name = "Nama penuh diperlukan"
-  if (!/^[0-9+\-()\s]{7,20}$/.test(props.modelValue.phone?.trim() || "")) {
-    e.phone = "Nombor telefon tidak sah"
-  }
   if (!props.modelValue.party_size) e.party_size = "Sila pilih bilangan tetamu"
   return e
 })
@@ -43,17 +46,6 @@ const isValid = computed(() => Object.keys(errors.value).length === 0)
       <span v-if="errors.guest_name" class="field-error" role="alert">{{ errors.guest_name }}</span>
     </div>
 
-    <div class="field">
-      <label for="phone">Nombor Telefon *</label>
-      <input
-        id="phone"
-        type="tel"
-        :value="modelValue.phone"
-        @input="update('phone', $event.target.value)"
-      />
-      <span v-if="errors.phone" class="field-error" role="alert">{{ errors.phone }}</span>
-    </div>
-
     <fieldset class="field party-size">
       <legend>Jumlah yang Hadir *</legend>
       <label v-for="n in partyOptions" :key="n" class="party-size__option">
@@ -67,9 +59,9 @@ const isValid = computed(() => Object.keys(errors.value).length === 0)
         {{ n }} &mdash; {{ PARTY_LABELS[n] }}
       </label>
       <p class="party-size__note">
-        Jumlah termasuk diri anda. Maksimum 3 orang bagi setiap jemputan.
+        Jumlah termasuk diri anda. Maksimum 5 orang bagi setiap jemputan.
       </p>
-      <span v-if="maxAllowed < 3" class="field-error" style="color: var(--text-muted)">
+      <span v-if="maxAllowed < 5" class="field-error" style="color: var(--text-muted)">
         Tempat yang tinggal terhad kepada {{ maxAllowed }} orang untuk tarikh ini.
       </span>
     </fieldset>

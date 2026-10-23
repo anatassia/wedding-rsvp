@@ -15,7 +15,6 @@ const phase = ref("date") // date | details | review | done
 const form = reactive({
   event_date_id: "",
   guest_name: "",
-  phone: "",
   party_size: "",
   companion_names: "",
   notes: "",
@@ -29,7 +28,7 @@ const codeCopied = ref(false)
 const selectedDate = computed(() => dates.value.find((d) => d.id === form.event_date_id) || null)
 const effectiveMax = computed(() => {
   if (!selectedDate.value) return 0
-  return Math.min(3, Math.max(0, selectedDate.value.remaining))
+  return Math.min(5, Math.max(0, selectedDate.value.remaining))
 })
 
 function chooseDate(id) {
@@ -44,7 +43,6 @@ async function handleConfirm() {
     const { rsvp } = await createRsvp({
       event_date_id: form.event_date_id,
       guest_name: form.guest_name,
-      phone: form.phone,
       party_size: form.party_size,
       companion_names: form.companion_names,
       notes: form.notes,
