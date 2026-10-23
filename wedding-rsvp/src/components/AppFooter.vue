@@ -1,7 +1,7 @@
 <template>
   <footer class="site-footer">
     <div class="container">
-      <p>Iskandar &amp; Nasyiaa &middot; 27 Disember 2026</p>
+      <p>Nasyiaa &amp; Iskandar &middot; 27 Disember 2026</p>
       <router-link to="/rsvp/semak" class="site-footer__link">Semak / Ubah RSVP anda</router-link>
     </div>
   </footer>

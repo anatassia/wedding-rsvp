@@ -75,7 +75,7 @@ async function handleOpen() {
     <div class="entrance__stage">
       <header class="entrance__title">
         <p class="entrance__eyebrow">Walimatul Urus</p>
-        <h1 class="entrance__names">Nayiaa &amp; Iskandar</h1>
+        <h1 class="entrance__names">Nasyiaa &amp; Iskandar</h1>
         <p class="entrance__date">27 Disember 2026</p>
       </header>
 

@@ -38,7 +38,7 @@ import ContactSection from "../components/ContactSection.vue"
         <div class="jemputan__meta">
           <p>27 Disember 2026</p>
           <p>11:30 pagi hingga 4:30 petang</p>
-          <p>Kunang Sungai Petani</p>
+          <p>KUNANG-KUNANG</p>
         </div>
       </FadeInSection>
 

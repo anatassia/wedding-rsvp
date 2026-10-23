@@ -1,12 +1,12 @@
 <script setup>
 defineProps({
-  venue: { type: String, default: "KUNANG KUNANG" },
+  venue: { type: String, default: "KUNANG-KUNANG" },
 })
 
 const address = "23, Taman Aman, 08000 Sungai Petani, Kedah"
 const mapsUrl = import.meta.env.VITE_GOOGLE_MAPS_URL ||
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`KUNANG KUNANG, ${address}`)}`
-const wazeUrl = `https://www.waze.com/ul?q=${encodeURIComponent(`KUNANG KUNANG, ${address}`)}&navigate=yes`
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`KUNANG-KUNANG, ${address}`)}`
+const wazeUrl = `https://www.waze.com/ul?q=${encodeURIComponent(`KUNANG-KUNANG, ${address}`)}&navigate=yes`
 </script>
 
 <template>

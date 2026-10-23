@@ -49,9 +49,15 @@ function handleEnvelopeOpening() {
   <div>
     <div id="home">
       <CoupleHero />
-      <VerseSection />
+        <VerseSection />
     </div>
-
+<!-- 
+    <FadeInSection>
+      <section class="section section--soft">
+      
+      </section>
+    </FadeInSection> -->
+  
     <FadeInSection>
       <section id="couple" class="section section--alt">
         <div class="couple-intro container container--narrow">
@@ -65,7 +71,7 @@ function handleEnvelopeOpening() {
       </section>
     </FadeInSection>
 
-    <FadeInSection>
+     <FadeInSection>
       <section id="event" class="section section--alt">
         <div class="event-countdown container">
           <p class="eyebrow">Menghitung Detik</p>
@@ -76,6 +82,8 @@ function handleEnvelopeOpening() {
         <EventSection v-else :dates="dates" />
       </section>
     </FadeInSection>
+
+
     <FadeInSection>
       <section id="alamat" class="section">
         <AddressSection venue="KUNANG KUNANG" />
@@ -112,6 +120,7 @@ function handleEnvelopeOpening() {
         </div>
       </section>
     </FadeInSection>
+
   </div>
 
   <footer class="home-footer">
@@ -120,7 +129,7 @@ function handleEnvelopeOpening() {
       <h2 class="foil">Iskandar &amp; Nasyiaa</h2>
       <p>Kami nantikan kehadiran anda.</p>
       <p class="home-footer__credit">
-        27 Disember 2026 &middot; <strong>Kunang Sungai Petani</strong>
+        27 Disember 2026 &middot; <strong>Kunang-Kunang, Sungai Petani</strong>
       </p>
       <router-link to="/rsvp/semak" class="home-footer__link">Semak / Ubah RSVP anda</router-link>
     </div>

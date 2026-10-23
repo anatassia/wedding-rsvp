@@ -3,7 +3,7 @@
 Vue 3 (Vite, Composition API, Vue Router) frontend + Vercel Functions
 backend, backed by Supabase Postgres. Guest-facing language is Bahasa
 Melayu. Wedding: **26 & 27 December 2026** (Saturday & Sunday), 12:00
-tengah hari – 5:00 petang, Kunang Sungai Petani.
+tengah hari – 5:00 petang, KUNANG-KUNANG.
 
 RSVP is **open access**: anyone with the site link can submit directly,
 gated only by remaining capacity per date — there is no invitation
@@ -92,7 +92,7 @@ server (for `VITE_*` vars) reads both. Keep both in sync.
 | `ADMIN_USER_IDS` | backend only | comma-separated Supabase Auth user UUIDs allowed into the organiser dashboard |
 | `VITE_SUPABASE_URL` | frontend | same Supabase project URL, inlined at build time |
 | `VITE_SUPABASE_PUBLISHABLE_KEY` | frontend | the **anon/publishable** key — safe to expose, used only for organiser sign-in |
-| `VITE_GOOGLE_MAPS_URL` | frontend | optional; falls back to a generic "Kunang Sungai Petani" Maps search if blank |
+| `VITE_GOOGLE_MAPS_URL` | frontend | optional; falls back to a Google Maps search for KUNANG-KUNANG if blank |
 | `VITE_WEDDING_AUDIO_URL` | frontend | optional; background-music file URL. Leave blank to keep the music toggle present but disabled — **do not** point this at copyrighted audio you don't have the rights to use |
 
 ## 3. Supabase setup
@@ -116,7 +116,7 @@ Specifically, 0001:
 - Corrects `event_dates`: the two existing rows (previously dated
   2027-12-26 / 2027-12-27 from an earlier iteration of this project) are
   updated to **2026-12-26 (venue: Kg Raja Gabus)** and **2026-12-27
-  (venue: Kunang Sungai Petani)**. Capacities (200 / 150) were already
+  (venue: KUNANG-KUNANG)**. Capacities (200 / 150) were already
   correct and are untouched.
 - Loosens `rsvps.invitation_id` to nullable (the invitation-token model
   this project used earlier is retired in favour of open access +

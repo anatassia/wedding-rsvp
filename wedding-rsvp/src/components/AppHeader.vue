@@ -8,7 +8,7 @@ const open = ref(false)
   <header class="site-header">
     <div class="container site-header__bar">
       <router-link to="/" class="site-header__brand" @click="open = false">
-        Iskandar & Nasyiaa
+        Nasyiaa & Iskandar
       </router-link>
 
       <button

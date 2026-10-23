@@ -8,7 +8,7 @@ const props = defineProps({
 })
 
 const mapsUrl = import.meta.env.VITE_GOOGLE_MAPS_URL ||
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Kunang Sungai Petani")}`
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("KUNANG-KUNANG, 23, Taman Aman, 08000 Sungai Petani, Kedah")}`
 
 const event = computed(() => {
   if (!props.dates.length) return null
