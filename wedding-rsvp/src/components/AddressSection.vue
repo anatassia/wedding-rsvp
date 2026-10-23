@@ -1,10 +1,12 @@
 <script setup>
 defineProps({
-  venue: { type: String, default: "" },
+  venue: { type: String, default: "KUNANG KUNANG" },
 })
 
+const address = "23, Taman Aman, 08000 Sungai Petani, Kedah"
 const mapsUrl = import.meta.env.VITE_GOOGLE_MAPS_URL ||
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Kunang Sungai Petani")}`
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`KUNANG KUNANG, ${address}`)}`
+const wazeUrl = `https://www.waze.com/ul?q=${encodeURIComponent(`KUNANG KUNANG, ${address}`)}&navigate=yes`
 </script>
 
 <template>
@@ -20,7 +22,15 @@ const mapsUrl = import.meta.env.VITE_GOOGLE_MAPS_URL ||
       </svg>
       <p class="address-card__kicker">Majlis Perkahwinan</p>
       <h3 class="address-card__name">{{ venue }}</h3>
-      <a class="btn btn--outline" :href="mapsUrl" target="_blank" rel="noopener">Buka Peta</a>
+      <p class="address-card__address">{{ address }}</p>
+      <div class="address-card__actions">
+        <a class="btn btn--outline" :href="mapsUrl" target="_blank" rel="noopener">
+          Google Maps
+        </a>
+        <a class="btn btn--outline" :href="wazeUrl" target="_blank" rel="noopener">
+          Waze
+        </a>
+      </div>
     </article>
   </div>
 </template>
@@ -51,6 +61,23 @@ const mapsUrl = import.meta.env.VITE_GOOGLE_MAPS_URL ||
 }
 
 .address-card__name {
-  margin-bottom: 20px;
+  margin-bottom: 8px;
+}
+
+.address-card__address {
+  margin: 0 auto 22px;
+  max-width: 280px;
+  line-height: 1.5;
+}
+
+.address-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.address-card__actions .btn {
+  min-width: 132px;
 }
 </style>

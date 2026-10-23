@@ -10,81 +10,81 @@ const props = defineProps({
 const mapsUrl = import.meta.env.VITE_GOOGLE_MAPS_URL ||
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Kunang Sungai Petani")}`
 
-const cards = computed(() =>
-  props.dates.map((d, i) => ({
+const event = computed(() => {
+  if (!props.dates.length) return null
+  const first = props.dates[0]
+
+  const sessions = props.dates.map((d, i) => ({
     id: d.id,
     label: `Sesi ${i + 1}`,
-    date: formatMalayDate(d.event_date),
-    day: getMalayDayName(d.event_date),
     time: formatEventTime(d.start_time, d.end_time),
-    venue: d.venue,
     calendarHref: googleCalendarLink({
       date: d.event_date,
       startTime: d.start_time || "12:00",
       endTime: d.end_time || "17:00",
-      title: "Walimatulurus Iskandar & Nasyiaa",
+      title: `Walimatulurus Iskandar & Nasyiaa — Sesi ${i + 1}`,
       location: d.venue,
     }),
   }))
-)
+
+  return {
+    date: formatMalayDate(first.event_date),
+    day: getMalayDayName(first.event_date),
+    venue: first.venue,
+    sessions,
+  }
+})
 </script>
 
 <template>
-  <div class="container">
+  <div class="container container--narrow">
     <header class="section__head">
       <p class="eyebrow">Tarikh &amp; Tempat</p>
       <h2 class="section__title">Atur Majlis</h2>
     </header>
 
-    <div class="events">
-      <article v-for="card in cards" :key="card.id" class="event-card">
-        <p class="event-card__kicker">Majlis Perkahwinan</p>
-        <h3 class="event-card__name">{{ card.label }}</h3>
-        <div class="event-card__rule" aria-hidden="true" />
+    <article v-if="event" class="event-card">
+      <p class="event-card__kicker">Majlis Perkahwinan</p>
+      <h3 class="event-card__name">Iskandar &amp; Nasyiaa</h3>
+      <div class="event-card__rule" aria-hidden="true" />
 
-        <dl class="detail">
-          <div class="detail__row">
-            <dt>Tarikh</dt>
-            <dd>{{ card.date }}</dd>
-          </div>
-          <div class="detail__row">
-            <dt>Hari</dt>
-            <dd>{{ card.day }}</dd>
-          </div>
-          <div class="detail__row">
-            <dt>Masa</dt>
-            <dd>{{ card.time }}</dd>
-          </div>
-          <div class="detail__row">
-            <dt>Tempat</dt>
-            <dd><strong>{{ card.venue }}</strong></dd>
-          </div>
-        </dl>
-
-        <div class="event-card__actions">
-          <a class="btn" :href="mapsUrl" target="_blank" rel="noopener">Lokasi</a>
-          <a class="btn btn--outline" :href="card.calendarHref" target="_blank" rel="noopener">Tambah Kalendar</a>
+      <dl class="detail">
+        <div class="detail__row">
+          <dt>Tarikh</dt>
+          <dd>{{ event.date }}</dd>
         </div>
-      </article>
-    </div>
+        <div class="detail__row">
+          <dt>Hari</dt>
+          <dd>{{ event.day }}</dd>
+        </div>
+        <div class="detail__row">
+          <dt>Tempat</dt>
+          <dd><strong>{{ event.venue }}</strong></dd>
+        </div>
+        <div v-for="session in event.sessions" :key="session.id" class="detail__row">
+          <dt>{{ session.label }}</dt>
+          <dd>{{ session.time }}</dd>
+        </div>
+      </dl>
+
+      <div class="event-card__actions">
+        <a class="btn" :href="mapsUrl" target="_blank" rel="noopener">Lokasi</a>
+        <a
+          v-for="session in event.sessions"
+          :key="session.id"
+          class="btn btn--outline"
+          :href="session.calendarHref"
+          target="_blank"
+          rel="noopener"
+        >
+          Tambah Kalendar &mdash; {{ session.label }}
+        </a>
+      </div>
+    </article>
   </div>
 </template>
 
 <style scoped>
-.events {
-  display: grid;
-  gap: 20px;
-  max-width: 420px;
-  margin: 0 auto;
-}
-
-@media (min-width: 640px) {
-  .events {
-    max-width: none;
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 .event-card {
   background: var(--white);
   border: 1px solid var(--border);

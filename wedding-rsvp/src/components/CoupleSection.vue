@@ -1,5 +1,5 @@
 <script setup>
-import heroImg from "../assets/hero.png"
+import heroImg from "../assets/image2.jpeg"
 </script>
 
 <template>
@@ -13,18 +13,18 @@ import heroImg from "../assets/hero.png"
       <div class="person__photo">
         <img :src="heroImg" alt="Iskandar dan Nasyiaa" loading="lazy" />
       </div>
-      <h3 class="person__name">Nur Iskandar Bin Azmi <span class="foil">&amp;</span> Nur Annassia Rifdah Binti Mokhtar</h3>
+      <h3 class="person__name">Nur Annassia Rifdah Binti Mokhtar</h3>
+      <span class="foil">&amp;</span>
+      <h3 class="person__name">Nur Iskandar Bin Azmi</h3>
 
       <div class="person__parents">
-        <div>
-          <p class="person__label">Putera kepada</p>
-          <!-- Sila kemaskini nama penuh ibu bapa pengantin lelaki -->
-          <p class="person__names">Azmi bin [Nama]<br />&amp;<br />[Nama Ibu]</p>
+         <div>
+          <h2 class="person__label">Puteri kepada</h2>
+          <h4 class="person__names">Mokhtar bin Ramli<br />&amp;<br />Farizah binti Abdullah</h4>
         </div>
         <div>
-          <p class="person__label">Puteri kepada</p>
-          <!-- Sila kemaskini nama penuh ibu bapa pengantin perempuan -->
-          <p class="person__names">Mokhtar bin [Nama]<br />&amp;<br />Farizah binti [Nama]</p>
+          <h2 class="person__label">Putra kepada</h2>
+          <h4 class="person__names">Azmi bin Hamzah<br />&amp;<br />Farizan binti Rabu</h4>
         </div>
       </div>
     </article>
@@ -56,16 +56,27 @@ import heroImg from "../assets/hero.png"
 }
 
 .person__name {
-  font-family: var(--font-heading);
-  font-size: clamp(1.2rem, 3.4vw, 1.6rem);
-  line-height: 1.4;
-  margin-bottom: 24px;
+  font-family: var(--font-felipa);
+  font-size: clamp(1.45rem, 4.5vw, 2rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  margin: 8px 0;
+}
+
+.person > .foil {
+  display: block;
+  font-family: var(--font-felipa);
+  font-size: 1.6rem;
+  line-height: 1;
+  margin: 4px 0;
 }
 
 .person__parents {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 20px;
+  margin-top: 28px;
 }
 
 .person__label {
@@ -78,8 +89,12 @@ import heroImg from "../assets/hero.png"
 
 .person__names {
   color: var(--text-muted);
-  font-size: 0.92rem;
-  line-height: 1.6;
+  font-family: var(--font-felipa);
+  font-size: clamp(1.35rem, 4vw, 1.8rem);
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  margin: 0;
 }
 
 @media (max-width: 480px) {

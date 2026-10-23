@@ -7,8 +7,8 @@ const links = [
   { href: "#home", label: "Utama" },
   { href: "#couple", label: "Pengantin" },
   { href: "#event", label: "Majlis" },
-  { href: "#tentative", label: "Atur Cara" },
   { href: "#alamat", label: "Alamat" },
+  { href: "#ucapan", label: "Ucapan" },
   { href: "#hubungi", label: "Hubungi" },
 ]
 

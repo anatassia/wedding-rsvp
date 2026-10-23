@@ -1,15 +1,15 @@
 <script setup>
 import { ref } from "vue"
-import EntryEnvelope from "../components/EntryEnvelope.vue"
+import WeddingEntrance from "../components/WeddingEntrance.vue"
 import HomeNav from "../components/HomeNav.vue"
 import CoupleHero from "../components/CoupleHero.vue"
 import CountdownTimer from "../components/CountdownTimer.vue"
 import VerseSection from "../components/VerseSection.vue"
 import CoupleSection from "../components/CoupleSection.vue"
 import EventSection from "../components/EventSection.vue"
-import ItinerarySection from "../components/ItinerarySection.vue"
 import AddressSection from "../components/AddressSection.vue"
 import ContactSection from "../components/ContactSection.vue"
+import WishesSection from "../components/WishesSection.vue"
 import FloatingPetals from "../components/FloatingPetals.vue"
 import MusicControl from "../components/MusicControl.vue"
 import FadeInSection from "../components/FadeInSection.vue"
@@ -28,13 +28,20 @@ function handleEnvelopeOpened() {
   } catch {
     /* storage unavailable — fine, envelope just replays next visit */
   }
+}
+
+function handleEnvelopeOpening() {
   musicControl.value?.startAfterUserGesture()
 }
 </script>
 
 <template>
   <div class="invitation-view">
-  <EntryEnvelope v-if="!envelopeOpened" @opened="handleEnvelopeOpened" />
+  <WeddingEntrance
+    v-if="!envelopeOpened"
+    @opening="handleEnvelopeOpening"
+    @opened="handleEnvelopeOpened"
+  />
 
   <FloatingPetals />
   <HomeNav />
@@ -42,61 +49,47 @@ function handleEnvelopeOpened() {
   <div>
     <div id="home">
       <CoupleHero />
+      <VerseSection />
     </div>
 
     <FadeInSection>
-      <section class="section section--soft">
-        <VerseSection />
-      </section>
-    </FadeInSection>
-
-    <FadeInSection>
-      <section class="section">
-        <div class="container container--narrow" style="text-align: center">
-          <p>
-            Dengan penuh rasa syukur ke hadrat Allah SWT, kami ingin memaklumkan
-            tarikh bagi majlis perkahwinan kami. Mohon doa dan restu daripada
-            semua agar segala urusan dipermudahkan dan diberkati Allah SWT.
-          </p>
-        </div>
-      </section>
-    </FadeInSection>
-
-    <FadeInSection>
       <section id="couple" class="section section--alt">
+        <div class="couple-intro container container--narrow">
+          <p>
+          Dengan penuh rasa syukur ke hadrat Allah SWT, kami ingin menjemput
+          Dato&rsquo; / Datin / Tuan / Puan / Encik / Cik sekeluarga untuk
+          menghadiri majlis perkahwinan puteri kami yang tercinta:
+        </p>
+        </div>
         <CoupleSection />
       </section>
     </FadeInSection>
 
-    <section class="section section--deep">
-      <div class="container" style="text-align: center">
-        <p class="eyebrow eyebrow--light">Menghitung Detik</p>
-        <CountdownTimer />
-      </div>
-    </section>
-
     <FadeInSection>
-      <section id="event" class="section">
+      <section id="event" class="section section--alt">
+        <div class="event-countdown container">
+          <p class="eyebrow">Menghitung Detik</p>
+          <CountdownTimer />
+        </div>
         <p v-if="loading" class="container" style="text-align: center">Memuatkan...</p>
         <p v-else-if="error" class="container alert alert--error">{{ error }}</p>
         <EventSection v-else :dates="dates" />
       </section>
     </FadeInSection>
-
-    <FadeInSection>
-      <section id="tentative" class="section section--alt">
-        <ItinerarySection :dates="dates" />
-      </section>
-    </FadeInSection>
-
     <FadeInSection>
       <section id="alamat" class="section">
-        <AddressSection :venue="dates[0]?.venue || 'Kunang Sungai Petani'" />
+        <AddressSection venue="KUNANG KUNANG" />
       </section>
     </FadeInSection>
 
     <FadeInSection>
-      <section id="hubungi" class="section section--alt">
+      <section id="ucapan" class="section section--alt">
+        <WishesSection />
+      </section>
+    </FadeInSection>
+
+    <FadeInSection>
+      <section id="hubungi" class="section">
         <div class="container container--narrow">
           <header class="section__head">
             <p class="eyebrow">Sebarang Pertanyaan</p>
@@ -119,13 +112,6 @@ function handleEnvelopeOpened() {
         </div>
       </section>
     </FadeInSection>
-
-    <section class="section">
-      <div class="container container--narrow" style="text-align: center">
-        <p>InsyaAllah, kami nantikan kehadiran anda.</p>
-        <p>Terima kasih.</p>
-      </div>
-    </section>
   </div>
 
   <footer class="home-footer">
@@ -145,6 +131,20 @@ function handleEnvelopeOpened() {
 </template>
 
 <style scoped>
+.couple-intro {
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.couple-intro p {
+  margin: 0;
+}
+
+.event-countdown {
+  margin-bottom: 48px;
+  text-align: center;
+}
+
 .home-footer {
   background: var(--navy);
   color: var(--white);

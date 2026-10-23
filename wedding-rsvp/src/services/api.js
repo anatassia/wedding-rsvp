@@ -59,6 +59,20 @@ export async function cancelRsvp(referenceCode, phone) {
   return parseResponse(res);
 }
 
+export async function getWishes() {
+  const res = await fetch("/api/wishes");
+  return parseResponse(res);
+}
+
+export async function createWish(body) {
+  const res = await fetch("/api/wishes", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  return parseResponse(res);
+}
+
 function authHeaders(accessToken) {
   return { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" };
 }

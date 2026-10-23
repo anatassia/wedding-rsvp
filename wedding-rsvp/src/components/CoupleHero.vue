@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue"
-import heroImg from "../assets/hero.png"
+import heroImg from "../assets/story-photo.jpeg"
 import { useParallax } from "../composables/useParallax.js"
 
 const heroPhoto = ref(null)
@@ -25,15 +25,6 @@ useParallax(heroPhoto, { intensity: 0.08 })
 
       <p class="couple-hero__tagline">Dua hati, satu perjalanan.</p>
 
-      <p class="couple-hero__meta">27 Disember 2026</p>
-      <p class="couple-hero__meta">Kunang Sungai Petani</p>
-      <p class="couple-hero__meta">11:30 pagi &ndash; 4:30 petang</p>
-
-      <div class="couple-hero__actions">
-        <router-link to="/rsvp" class="btn">Sahkan Kehadiran</router-link>
-        <router-link to="/jemputan" class="btn btn--outline">Lihat Jemputan</router-link>
-        <router-link to="/kisah-kami" class="btn btn--ghost">Kisah Kami</router-link>
-      </div>
     </div>
   </section>
 </template>
@@ -75,16 +66,4 @@ useParallax(heroPhoto, { intensity: 0.08 })
   margin: 14px 0 6px;
 }
 
-.couple-hero__meta {
-  margin: 0;
-  color: var(--text-muted);
-}
-
-.couple-hero__actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 22px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
 </style>

@@ -1,3 +1,8 @@
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+}
+
 :root {
   --navy: #4a6b85;
   --silver-blue: #eef3f7;
@@ -14,6 +19,7 @@
 
   --font-heading: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-script: "Pinyon Script", "Cormorant Garamond", cursive;
+  --font-felipa: "Felipa", "Cormorant Garamond", cursive;
   --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
 
   --foil: linear-gradient(100deg, #6f93ad 0%, #d9e6ee 28%, #8fb0c9 50%, #eef3f7 72%, #6f93ad 100%);
@@ -84,7 +90,7 @@ button {
 }
 
 .section {
-  padding: 56px 0;
+  padding: 10px 0;
 }
 
 .section--soft {

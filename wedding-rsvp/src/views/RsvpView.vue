@@ -103,7 +103,8 @@ async function copyCode() {
 
       <GuestDetailsStep
         v-else-if="phase === 'details'"
-        v-model="form"
+        :model-value="form"
+        @update:model-value="(val) => Object.assign(form, val)"
         :max-allowed="effectiveMax"
         @back="phase = 'date'"
         @next="phase = 'review'"
